@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<h1>새 글</h1>
+	<form action="{% url 'part1:create' %}" method="post">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<button type="submit">등록</button>
+	</form>
+{% endblock content %}

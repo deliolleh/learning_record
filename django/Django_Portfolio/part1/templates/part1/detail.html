@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<h1>Detail</h1>
+	<hr>
+    <div class="container d-flex justify-content-center">
+        <img src="{{ liquor.img_url }}" alt="liquor" style="width:300px; height:300px;">
+        <div class="d-flex flex-column justify-content-center">
+            <h2>{{ liquor.name }}</h2>
+            <h3>도수: {{ liquor.alcohol }} %</h3>
+            <h3>생산국가: {{ liquor.country }}</h3>
+            <h3>용량: {{ liquor.size }} ml</h3>
+        </div>
+    </div>
+	<hr>
+    <div class="d-flex flex-column align-items-end">
+        <p>마지막 업데이트: {{ liquor.updated_at }}</p>
+        <div>
+            <form action="{% url 'part1:delete' liquor.pk %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="삭제">
+            </form>
+            <a href="{% url 'part1:index' %}">뒤로가기</a>
+        </div>
+    </div>
+{% endblock content %}

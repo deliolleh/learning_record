@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<h1>전체보기</h1>
+	<hr>
+    <div class="row">
+        {% for liquor in liquors %}
+            <div class="card mx-3 d-flex align-items-center" style="width: 18rem;">
+                <a href="{% url 'part1:detail' liquor.pk %}">
+                    <img src="{{ liquor.img_url }}" alt="img" class="card-img-top" style="width:17rem; height:17rem;">
+                </a>
+            </div>
+        {% empty %}
+            <p>자료가 비어있습니다</p>
+        {% endfor %}
+    </div>
+    <hr>
+    <a href="{% url 'part1:create' %}">새 글 작성</a>
+{% endblock content %}

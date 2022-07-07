@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} home.html {% endblock title %} home.html 
+
+{% block extra-style %}
+  {{ block.super }}
+  <style>
+    .my-img-h300 {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+    }
+    .my-post-title {
+      height: 60px;
+    }
+    .my-link:hover {
+      cursor: pointer;
+    }
+  </style>
+{% endblock extra-style %}
+
+{% block content %}
+
+        <!-- Blog Grid-->
+        <section class="page-section bg-light" id="portfolio">
+            <div class="container">
+                <div class="text-center">
+                    <div class="section-heading">
+                      <span class="h2 text-uppercase">Post List</span>&nbsp;
+                      <span v-if="category" class="h6 fst-italic">( Category: [[ category ]] )</span>
+                      <span v-if="tag" class="h6 fst-italic">( Tag: [[ tag ]] )</span>
+                    </div>
+                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                </div>
+                <div class="row">
+                    <div v-for="post in postList" :key="post.id" class="col-lg-4 col-sm-6 mb-4">
+                        <!-- Portfolio item 1-->
+                        <div class="portfolio-item">
+                            <a class="portfolio-link" :href="`/blog/post/${post.id}/#post`">
+                                <div class="portfolio-hover">
+                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                                </div>
+                                <img class="img-fluid my-image-h300" :src="post.image" alt="..." />
+                            </a>
+                            <div class="portfolio-caption">
+                              <div class="portfolio-caption-subheading text-muted">
+                                [[ post.category ]] &emsp;
+                                <i class="fas fa-heart text-danger"></i> [[ post.like ]]
+                              </div>
+                              <div class="portfolio-caption-heading my-post-title">[[ post.title ]]</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- My Pagination -->
+                <ul class="pagination justify-content-center">
+                  <li :class="prevClass">
+                    <div @click="firstPage" class="page-link">First</div>
+                  </li>
+
+                  <li :class="prevClass">
+                    <div @click="prevPage" class="page-link">Prev</div>
+                  </li>
+                  
+                  <li v-for="page in pages" :class="pageClass(page)">
+                    <div @click="pageChanged(page)" class="page-link" href="#">[[ page ]]</div>
+                  </li>
+                  
+                  <li :class="nextClass">
+                    <div @click="nextPage" class="page-link" href="#">Next</div>
+                  </li>
+
+                  <li :class="nextClass">
+                    <div @click="lastPage" class="page-link">Last</div>
+                  </li>
+                </ul>
+
+            </div>
+        </section>
+
+        <!-- Iam -->
+        <section class="page-section bg-light" id="team">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Han Jae Hyuk</h2>
+                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="team-member">
+                            <img class="mx-auto rounded-circle" src="{% static 'assets/img/team/1.jpg' %}" alt="..." />
+                            <h4>Creative Company</h4>
+                            <p class="text-muted">Python Web Programmer</p>
+                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Twitter Profile"><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Facebook Profile"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                      내 소개 내용...
+                    </div>
+                </div>
+            </div>
+        </section>
+
+{% endblock content %}
+
+
+{% block footer %}
+<!-- Footer-->
+<footer class="footer py-4">
+  <div class="container">
+      <div class="row align-items-center">
+          <div class="col-lg-4 text-lg-start">Copyright &copy; Your Website 2022</div>
+          <div class="col-lg-4 my-3 my-lg-0">
+              <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+              <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+              <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+          <div class="col-lg-4 text-lg-end">
+              <a class="link-dark text-decoration-none me-3" href="#!">Privacy Policy</a>
+              <a class="link-dark text-decoration-none" href="#!">Terms of Use</a>
+          </div>
+      </div>
+  </div>
+</footer>
+{% endblock footer %}
+
+{% block extra-script %}
+  {% include 'include/post_list_vue.html' %}
+{% endblock extra-script %}
