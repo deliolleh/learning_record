@@ -1,6 +1,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/react,java,python,vue
 # Edit at https://www.toptal.com/developers/gitignore?templates=react,java,python,vue
 
+# code.json
+code.json
+
 ### Java ###
 # Compiled class file
 *.class
